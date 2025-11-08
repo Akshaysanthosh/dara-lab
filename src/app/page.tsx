@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,20 +83,12 @@ export default function Page() {
   ];
 
   return (
-    <main className={`min-h-screen ${isDarkMode ? 'bg-neutral-900 text-white' : 'bg-white text-neutral-900'} antialiased transition-colors duration-500`}>
+    <main className="min-h-screen bg-neutral-900 text-white antialiased transition-colors duration-500">
       {/* Noise Texture Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.015]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
       }} />
 
-      {/* Dark Mode Toggle */}
-      <button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className={`fixed top-6 right-6 z-50 p-3 rounded-full ${isDarkMode ? 'bg-white/10 text-white' : 'bg-neutral-900/10 text-neutral-900'} backdrop-blur-sm border ${isDarkMode ? 'border-white/20' : 'border-neutral-900/20'} hover:scale-110 transition-all duration-300 shadow-lg`}
-        aria-label="Toggle dark mode"
-      >
-        {isDarkMode ? '☀️' : '🌙'}
-      </button>
 
       {/* Hero Section with Parallax */}
       <section 
@@ -117,7 +109,7 @@ export default function Page() {
           <div 
             className="absolute w-[800px] h-[800px] rounded-full blur-3xl transition-all duration-300"
             style={{
-              background: `radial-gradient(circle, ${isDarkMode ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.2)'} 0%, transparent 70%)`,
+              background: `radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)`,
               left: `${mousePosition.x - 400}px`,
               top: `${mousePosition.y - 400}px`,
             }}
@@ -125,19 +117,19 @@ export default function Page() {
         </div>
 
         {/* Gradient Overlays */}
-        <div className={`absolute inset-0 bg-gradient-to-b ${isDarkMode ? 'from-neutral-900/95 via-neutral-900/85 to-neutral-900/95' : 'from-white/95 via-white/85 to-white/95'} transition-colors duration-500`} />
-        <div className={`absolute inset-0 bg-gradient-to-br ${isDarkMode ? 'from-blue-900/20 via-transparent to-neutral-900/20' : 'from-blue-50/40 via-transparent to-neutral-50/30'} transition-colors duration-500`} />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/95 via-neutral-900/85 to-neutral-900/95 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-neutral-900/20 transition-colors duration-500" />
 
         {/* Vignette */}
         <div className="absolute inset-0" style={{
-          background: `radial-gradient(ellipse at center, transparent 0%, ${isDarkMode ? 'rgba(23, 23, 23, 0.3)' : 'rgba(255,255,255,0.3)'} 70%, ${isDarkMode ? 'rgba(23, 23, 23, 0.7)' : 'rgba(255,255,255,0.7)'} 100%)`
+          background: `radial-gradient(ellipse at center, transparent 0%, rgba(23, 23, 23, 0.3) 70%, rgba(23, 23, 23, 0.7) 100%)`
         }} />
 
         {/* Floating Data Points */}
         {[...Array(12)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-2 h-2 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'} rounded-full animate-pulse`}
+            className="absolute w-2 h-2 bg-blue-400 rounded-full animate-pulse"
             style={{
               left: `${15 + (i * 7)}%`,
               top: `${20 + (i % 3) * 20}%`,
@@ -151,25 +143,25 @@ export default function Page() {
         {/* Content */}
         <div className={`relative z-10 max-w-5xl mx-auto transition-all duration-1000 ease-out ${fadeIn}`}>
           <div className="mb-6 inline-block">
-            <span className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30' : 'bg-blue-50 text-blue-700 border border-blue-200'} backdrop-blur-sm`}>
+            <span className="px-4 py-2 rounded-full text-sm font-medium bg-blue-500/20 text-blue-300 border border-blue-400/30 backdrop-blur-sm">
               Waterloo, Canada
             </span>
           </div>
           
-          <h1 className={`text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-white">
             Dara Lab
           </h1>
-          <p className={`text-xl sm:text-2xl lg:text-3xl ${isDarkMode ? 'text-neutral-300' : 'text-neutral-700'} max-w-3xl mx-auto font-light leading-relaxed mb-8`}>
+          <p className="text-xl sm:text-2xl lg:text-3xl text-neutral-300 max-w-3xl mx-auto font-light leading-relaxed mb-8">
             Next-generation AI research lab building domain-specific reasoning models for high-stakes, information-dense environments.
           </p>
-          <p className={`text-base sm:text-lg ${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} max-w-2xl mx-auto leading-relaxed`}>
+          <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
             Combining machine reasoning, scientific computing, and advanced information ranking to power critical decision systems.
           </p>
           
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button 
               onClick={() => document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })}
-              className={`group inline-flex items-center gap-2 px-8 py-4 ${isDarkMode ? 'bg-white text-neutral-900 hover:bg-neutral-100' : 'bg-neutral-900 text-white hover:bg-neutral-800'} rounded-full transition-all duration-300 hover:scale-105 font-medium shadow-lg hover:shadow-2xl`}
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-neutral-900 hover:bg-neutral-100 rounded-full transition-all duration-300 hover:scale-105 font-medium shadow-lg hover:shadow-2xl"
             >
               Explore Our Work
               <svg className="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,7 +171,7 @@ export default function Page() {
             
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className={`inline-flex items-center gap-2 px-8 py-4 ${isDarkMode ? 'bg-white/10 text-white border-white/20 hover:bg-white/20' : 'bg-white/80 text-neutral-900 border-neutral-200 hover:bg-white'} backdrop-blur-sm border rounded-full transition-all duration-300 hover:scale-105 font-medium shadow-lg`}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white border-white/20 hover:bg-white/20 backdrop-blur-sm border rounded-full transition-all duration-300 hover:scale-105 font-medium shadow-lg"
             >
               Get in Touch
             </button>
@@ -188,139 +180,24 @@ export default function Page() {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className={`w-6 h-6 ${isDarkMode ? 'text-white/50' : 'text-neutral-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section id="mission" className={`py-24 px-6 ${isDarkMode ? 'bg-gradient-to-b from-neutral-900 to-neutral-800' : 'bg-gradient-to-b from-white to-neutral-50'} transition-colors duration-500`}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-5xl sm:text-6xl font-bold text-center mb-8 ${isDarkMode ? 'text-white' : 'text-neutral-900'} transition-all duration-1000 delay-100 ${fadeIn}`}>
-            Mission
+      {/* What We Do Section */}
+      <section id="about" className="py-24 px-6 bg-neutral-950 text-neutral-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl sm:text-6xl font-bold mb-10 text-white">
+            What We Do
           </h2>
-          
-          <div className={`max-w-3xl mx-auto text-center mb-20 transition-all duration-1000 delay-200 ${fadeIn}`}>
-            <p className={`text-xl ${isDarkMode ? 'text-neutral-300' : 'text-neutral-600'} leading-relaxed mb-6`}>
-              We accelerate progress in applied AI by building transparent, high-performance systems that think clearly — and explain how they think.
-            </p>
-            <p className={`text-lg ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'} mb-4`}>
-              Our work focuses on high-stakes, information-dense environments where reasoning clarity and decision quality matter most.
-            </p>
-            <p className={`text-lg ${isDarkMode ? 'text-neutral-400' : 'text-neutral-500'}`}>
-              We do this by:
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
-            {[
-              {
-                title: "Domain-Specific Reasoning Models",
-                desc: "Building specialized AI systems trained on real-world constraints, capable of deep reasoning and rapid adaptation to complex domains.",
-                icon: (
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                ),
-                gradient: "from-blue-500/20 to-purple-500/20"
-              },
-              {
-                title: "Scientific Computing Innovation",
-                desc: "Applying advanced computational methods and simulation frameworks to enable breakthrough research in technical and scientific fields.",
-                icon: (
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                ),
-                gradient: "from-green-500/20 to-emerald-500/20"
-              },
-              {
-                title: "Information Ranking & Prioritization",
-                desc: "Developing sophisticated algorithms to extract, rank, and organize critical signals from massive, noisy data streams in real-time.",
-                icon: (
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                  </svg>
-                ),
-                gradient: "from-orange-500/20 to-red-500/20"
-              },
-              {
-                title: "Transparent Evaluation Tools",
-                desc: "Creating rigorous benchmarking and auditing frameworks for machine reasoning to ensure trust, alignment, and safety at scale.",
-                icon: (
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ),
-                gradient: "from-cyan-500/20 to-blue-500/20"
-              }
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`group relative p-8 ${isDarkMode ? 'bg-neutral-800/50 border-neutral-700 hover:border-neutral-600' : 'bg-white border-neutral-200 hover:border-neutral-300'} rounded-2xl border backdrop-blur-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: `${300 + i * 100}ms` }}
-              >
-                {/* Gradient Glow on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl`} />
-                
-                <div className="relative z-10">
-                  <div className={`mb-4 group-hover:scale-110 transition-transform duration-300 inline-block ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-                    {item.icon}
-                  </div>
-                  <h3 className={`text-xl font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
-                    {item.title}
-                  </h3>
-                  <p className={`${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} leading-relaxed`}>
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Areas of Focus */}
-      <section className={`py-24 px-6 ${isDarkMode ? 'bg-neutral-800' : 'bg-neutral-50'} transition-colors duration-500`}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className={`text-5xl sm:text-6xl font-bold text-center mb-8 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
-            Areas of Focus
-          </h2>
-          
-          <p className={`text-center ${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} mb-16 max-w-2xl mx-auto text-lg leading-relaxed`}>
-            From fundamental reasoning research to real-world deployment in geospatial intelligence, financial markets, and critical infrastructure—our work spans the full spectrum of high-stakes AI applications.
+          <p className="text-xl leading-relaxed text-neutral-300 mb-6">
+            <strong>Dara Lab</strong> builds transparent, high-performance AI systems that think clearly — and explain how they think. Our work spans the frontier of applied reasoning, where trust, speed, and clarity are essential. We focus on building domain-specific AI systems, signal ranking frameworks, and evaluation tools that support high-stakes decisions in complex, information-dense environments.
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {focusAreas.map((item, i) => (
-              <div
-                key={i}
-                className={`group relative p-8 ${isDarkMode ? 'bg-neutral-900/50 border-neutral-700 hover:border-blue-500/50' : 'bg-white border-neutral-200 hover:border-blue-200'} rounded-2xl border backdrop-blur-sm shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col`}
-              >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 rounded-2xl transition-all duration-500" />
-                
-                <div className="relative z-10 flex-1">
-                  <div className="flex items-start justify-between mb-5">
-                    <div className={`group-hover:scale-110 transition-transform duration-300 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-                      {item.icon}
-                    </div>
-                    <span className={`text-xs px-3 py-1 rounded-full ${isDarkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-50 text-blue-700'}`}>
-                      {item.tag}
-                    </span>
-                  </div>
-                  
-                  <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
-                    {item.title}
-                  </h3>
-                  <p className={`${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} text-sm leading-relaxed`}>
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-xl leading-relaxed text-neutral-300">
+            From geospatial intelligence and private markets to LLM alignment and real-time decision systems, we operate at the intersection of reasoning, systems, and signals. Our mission is to accelerate progress in applied AI by merging structured thinking with actionable intelligence — all while maintaining rigorous transparency and alignment at scale.
+          </p>
         </div>
       </section>
 
@@ -340,13 +217,13 @@ export default function Page() {
         </div>
       </section> */}
 
-      {/* How We Work - Process */}
-      <section className={`py-24 px-6 ${isDarkMode ? 'bg-neutral-800' : 'bg-neutral-50'} transition-colors duration-500`}>
+      {/* How We Work - Process
+      <section className="py-24 px-6 bg-neutral-800 transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
-          <h2 className={`text-4xl sm:text-5xl font-bold text-center mb-6 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-6 text-white">
             How We Work
           </h2>
-          <p className={`text-center ${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} mb-16 max-w-2xl mx-auto`}>
+          <p className="text-center text-neutral-400 mb-16 max-w-2xl mx-auto">
             Our approach combines rigorous research methodology with rapid iteration cycles, ensuring both theoretical soundness and practical impact.
           </p>
           
@@ -384,72 +261,62 @@ export default function Page() {
               }
             ].map((item, i) => (
               <div key={i} className="relative">
-                <div className={`${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                <div className="text-blue-400">
                   {item.icon}
                 </div>
-                <div className={`text-6xl font-bold ${isDarkMode ? 'text-neutral-700' : 'text-neutral-200'} mb-4`}>
+                <div className="text-6xl font-bold text-neutral-700 mb-4">
                   {item.step}
                 </div>
-                <h3 className={`text-xl font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+                <h3 className="text-xl font-semibold mb-3 text-white">
                   {item.title}
                 </h3>
-                <p className={`${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} leading-relaxed`}>
+                <p className="text-neutral-400 leading-relaxed">
                   {item.desc}
                 </p>
                 
                 {i < 2 && (
-                  <div className={`hidden md:block absolute top-12 -right-4 w-8 h-0.5 ${isDarkMode ? 'bg-neutral-700' : 'bg-neutral-300'}`} />
+                  <div className="hidden md:block absolute top-12 -right-4 w-8 h-0.5 bg-neutral-700" />
                 )}
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Newsletter Signup */}
-      <section className={`py-16 px-6 ${isDarkMode ? 'bg-neutral-900' : 'bg-white'} transition-colors duration-500`}>
-        <div className="max-w-2xl mx-auto text-center">
-          <h3 className={`text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
-            Stay Updated
-          </h3>
-          <p className={`${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} mb-8`}>
-            Get insights on AI reasoning research, new tools, and developments in high-stakes decision systems.
-          </p>
-          
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className={`flex-1 px-5 py-3 rounded-xl ${isDarkMode ? 'bg-neutral-800 border-neutral-700 text-white placeholder-neutral-500' : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder-neutral-400'} border focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
-            />
-            <button
-              type="submit"
-              className={`px-6 py-3 ${isDarkMode ? 'bg-white text-neutral-900 hover:bg-neutral-100' : 'bg-neutral-900 text-white hover:bg-neutral-800'} rounded-xl font-medium transition-all duration-300 hover:scale-105 shadow-lg`}
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
+{/* Newsletter Signup */}
+<section className="py-16 px-6 bg-neutral-900 transition-colors duration-500">
+  <div className="max-w-2xl mx-auto text-center">
+    <h3 className="text-3xl font-bold mb-4 text-white">
+      Stay Updated
+    </h3>
+    <p className="text-neutral-400 mb-8">
+      Get insights on our AI research, new tools, and products.
+    </p>
+
+    {/* Newsletter Form Component */}
+    <NewsletterForm />
+  </div>
+</section>
 
       {/* Contact Section */}
-      <section id="contact" className={`py-24 px-6 ${isDarkMode ? 'bg-gradient-to-b from-neutral-800 to-neutral-900' : 'bg-gradient-to-b from-neutral-50 to-white'} transition-colors duration-500`}>
+      {/* <section id="contact" className="py-24 px-6 bg-gradient-to-b from-neutral-800 to-neutral-900 transition-colors duration-500">
         <div className="max-w-2xl mx-auto">
-          <h2 className={`text-4xl sm:text-5xl font-bold mb-6 text-center ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center text-white">
             Let's Collaborate
           </h2>
-          <p className={`text-center ${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} mb-12 text-lg leading-relaxed`}>
+          <p className="text-center text-neutral-400 mb-12 text-lg leading-relaxed">
             We partner with researchers, engineers, and institutions working on the next generation of intelligent systems for high-stakes environments.
           </p>
 
           <form
             action="https://formspree.io/f/yourFormID"
             method="POST"
-            className={`${isDarkMode ? 'bg-neutral-800/50 border-neutral-700' : 'bg-white border-neutral-200'} p-8 sm:p-10 rounded-2xl shadow-2xl border backdrop-blur-sm`}
+            className="bg-neutral-800/50 border-neutral-700 p-8 sm:p-10 rounded-2xl shadow-2xl border backdrop-blur-sm"
           >
             <div className="space-y-6">
               <div>
-                <label htmlFor="name" className={`block text-sm font-medium ${isDarkMode ? 'text-neutral-300' : 'text-neutral-700'} mb-2`}>
+                <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-2">
                   Name
                 </label>
                 <input
@@ -457,12 +324,12 @@ export default function Page() {
                   id="name"
                   name="name"
                   required
-                  className={`w-full px-4 py-3 border ${isDarkMode ? 'bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500' : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder-neutral-400'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                  className="w-full px-4 py-3 border bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className={`block text-sm font-medium ${isDarkMode ? 'text-neutral-300' : 'text-neutral-700'} mb-2`}>
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
                   Email
                 </label>
                 <input
@@ -470,12 +337,12 @@ export default function Page() {
                   id="email"
                   name="email"
                   required
-                  className={`w-full px-4 py-3 border ${isDarkMode ? 'bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500' : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder-neutral-400'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                  className="w-full px-4 py-3 border bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className={`block text-sm font-medium ${isDarkMode ? 'text-neutral-300' : 'text-neutral-700'} mb-2`}>
+                <label htmlFor="message" className="block text-sm font-medium text-neutral-300 mb-2">
                   Message
                 </label>
                 <textarea
@@ -483,75 +350,95 @@ export default function Page() {
                   name="message"
                   rows={5}
                   required
-                  className={`w-full px-4 py-3 border ${isDarkMode ? 'bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500' : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder-neutral-400'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none`}
+                  className="w-full px-4 py-3 border bg-neutral-900/50 border-neutral-700 text-white placeholder-neutral-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                 />
               </div>
               
               <button
                 type="submit"
-                className={`w-full ${isDarkMode ? 'bg-white text-neutral-900 hover:bg-neutral-100' : 'bg-neutral-900 text-white hover:bg-neutral-800'} font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-2xl`}
+                className="w-full bg-white text-neutral-900 hover:bg-neutral-100 font-semibold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-2xl"
               >
                 Send Message
               </button>
             </div>
           </form>
         </div>
-      </section>
+      </section> */}
+
+      <section className="py-24 px-6 bg-black text-white text-center">
+  <div className="max-w-2xl mx-auto">
+    <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+      Let’s Collaborate
+    </h2>
+    <p className="text-lg text-neutral-400 leading-relaxed">
+      We partner with researchers, engineers, and institutions exploring the next generation of intelligent systems.
+      <br />
+      <br />
+      Interested? Reach out at{" "}
+      <a
+        href="mailto:a4santho@uwaterloo.ca"
+        className="underline underline-offset-4 text-white hover:text-blue-400 transition-colors"
+      >
+        a4santho@uwaterloo.ca
+      </a>.
+    </p>
+  </div>
+</section>
 
       {/* Footer */}
-      <footer className={`${isDarkMode ? 'bg-neutral-900 border-neutral-800' : 'bg-white border-neutral-200'} border-t transition-colors duration-500`}>
+      <footer className="bg-neutral-900 border-neutral-800 border-t transition-colors duration-500">
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="md:col-span-2">
-              <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+              <h3 className="text-2xl font-bold mb-3 text-white">
                 Dara Lab
               </h3>
-              <p className={`${isDarkMode ? 'text-neutral-400' : 'text-neutral-600'} text-sm leading-relaxed mb-2`}>
+              {/* <p className="text-neutral-400 text-sm leading-relaxed mb-2">
                 A next-generation AI research lab based in Waterloo, building domain-specific reasoning models for high-stakes, information-dense environments.
-              </p>
-              <p className={`${isDarkMode ? 'text-neutral-500' : 'text-neutral-500'} text-xs`}>
+              </p> */}
+              <p className="text-neutral-500 text-xs">
                 Waterloo, Ontario, Canada
               </p>
             </div>
             
-            <div>
-              <h4 className={`font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+            {/* <div>
+              <h4 className="font-semibold mb-3 text-white">
                 Research
               </h4>
               <ul className="space-y-2">
                 {['Publications', 'Tools', 'Blog', 'Careers'].map(item => (
                   <li key={item}>
-                    <a href="#" className={`text-sm ${isDarkMode ? 'text-neutral-400 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'} transition-colors`}>
+                    <a href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">
                       {item}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
             
-            <div>
-              <h4 className={`font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-neutral-900'}`}>
+            {/* <div>
+              <h4 className="font-semibold mb-3 text-white">
                 Connect
               </h4>
               <ul className="space-y-2">
                 {['Twitter', 'GitHub', 'LinkedIn', 'Email'].map(item => (
                   <li key={item}>
-                    <a href="#" className={`text-sm ${isDarkMode ? 'text-neutral-400 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'} transition-colors`}>
+                    <a href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">
                       {item}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
           
-          <div className={`pt-8 border-t ${isDarkMode ? 'border-neutral-800' : 'border-neutral-200'} flex flex-col sm:flex-row justify-between items-center gap-4`}>
-            <p className={`text-sm ${isDarkMode ? 'text-neutral-500' : 'text-neutral-500'}`}>
+          <div className="pt-8 border-t border-neutral-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-neutral-500">
               © {new Date().getFullYear()} Dara Lab. All rights reserved.
             </p>
             <div className="flex gap-6">
               {['Privacy', 'Terms', 'Security'].map(item => (
-                <a key={item} href="#" className={`text-sm ${isDarkMode ? 'text-neutral-500 hover:text-neutral-300' : 'text-neutral-500 hover:text-neutral-700'} transition-colors`}>
+                <a key={item} href="#" className="text-sm text-neutral-500 hover:text-neutral-300 transition-colors">
                   {item}
                 </a>
               ))}
