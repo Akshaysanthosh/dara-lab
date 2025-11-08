@@ -11,7 +11,7 @@ export default function NewsletterForm() {
     e.preventDefault();
     setError(false);
 
-    const res = await fetch('https://formspree.io/f/movyalpk', {
+    const res = await fetch('https://formspree.io/f/yourFormID', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

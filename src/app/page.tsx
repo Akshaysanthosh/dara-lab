@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import NewsletterForm from "@/components/NewsletterForm";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+
 
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
@@ -84,6 +86,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-neutral-900 text-white antialiased transition-colors duration-500">
+       <GoogleAnalytics />
       {/* Noise Texture Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.015]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
@@ -284,8 +287,7 @@ export default function Page() {
       </section> */}
 
       {/* Newsletter Signup */}
-{/* Newsletter Signup */}
-<section className="py-16 px-6 bg-neutral-900 transition-colors duration-500">
+     <section className="py-16 px-6 bg-neutral-900 transition-colors duration-500">
   <div className="max-w-2xl mx-auto text-center">
     <h3 className="text-3xl font-bold mb-4 text-white">
       Stay Updated
